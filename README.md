@@ -14,6 +14,15 @@
 - zero dependency
 - very lightweight(1.4kb)
 
+## Support
+
+- Chrome 23+
+- Firefox 22+
+- Opera 15+
+- Yandex 14.12
+- Safari 6.2+
+- iOS 7+ safari
+
 ## Install
 
 yarn
@@ -47,19 +56,19 @@ shear(document.getElementById('target'),  3, '<span>（展开）</span>');
 
 <p>before</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p1.png)
+![](https://dn-droiz.qbox.me/p11.png)
 
 <p>after</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p2.png)
+![](https://dn-droiz.qbox.me/p2.png)
 
 <p>before</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p3.png)
+![](https://dn-droiz.qbox.me/p3.png)
 
 <p>after</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p4.png)
+![](https://dn-droiz.qbox.me/p4.png)
 
 <a href="https://codepen.io/droiz/pen/YYWBBw/">codepen.io</a>
 
@@ -73,6 +82,15 @@ shear(document.getElementById('target'),  3, '<span>（展开）</span>');
 - 在截断的尾部插入html字符串
 - 零依赖
 - 轻量级（1.4kb）
+
+## 支持
+
+- Chrome 23+
+- Firefox 22+
+- Opera 15+
+- Yandex 14.12
+- Safari 6.2+
+- iOS 7+ safari
 
 ## 安装
 
@@ -107,18 +125,18 @@ shear(document.getElementById('target'),  3, '<span>（展开）</span>');
 
 <p>截断前</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p1.png)
+![](https://dn-droiz.qbox.me/p11.png)
 
 <p>截断后</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p2.png)
+![](https://dn-droiz.qbox.me/p2.png)
 
 <p>截断前</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p3.png)
+![](https://dn-droiz.qbox.me/p3.png)
 
 <p>截断后</p>
 
-![](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/example/imgs/p4.png)
+![](https://dn-droiz.qbox.me/p4.png)
 
 <a href="https://codepen.io/droiz/pen/YYWBBw/">codepen.io</a>
