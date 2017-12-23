@@ -12,7 +12,7 @@
 - **truncate across dom nodes within the target element, keep the original dom node within the target element**
 - insert the html string at the end of the truncation
 - zero dependency
-- very lightweight(1.4kb)
+- very lightweight(UMD: 1.3kb, ES Module: 1.1kb)
 
 ## Support
 
@@ -22,6 +22,8 @@
 - Yandex 14.12
 - Safari 6.2+
 - iOS 7+ safari
+
+Unfortunately, because IE/Edge does not support the relevant API, shear.js not support IE/Edge.
 
 ## Install
 
@@ -81,7 +83,7 @@ shear(document.getElementById('target'),  3, '<span>（展开）</span>');
 - **在目标元素内进行垮dom节点截断，保留目标元素内的原始dom节点**
 - 在截断的尾部插入html字符串
 - 零依赖
-- 轻量级（1.4kb）
+- 轻量级（UMD: 1.3kb, ES Module 1.1kb）
 
 ## 支持
 
@@ -91,6 +93,8 @@ shear(document.getElementById('target'),  3, '<span>（展开）</span>');
 - Yandex 14.12
 - Safari 6.2+
 - iOS 7+ safari
+
+不幸的是，由于IE/Edge不支持相关API，shear.js目前不支持IE/Edge。
 
 ## 安装
 

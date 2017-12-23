@@ -1,18 +1,12 @@
-function createElement(content: string | DocumentFragment) {
+function createElement(content: string) {
     let wrap = document.createElement('DIV');
-    if (typeof content === 'string') wrap.innerHTML = content;
-    else wrap.appendChild(content);
-    if (typeof content === 'string' && wrap.children.length === 0) throw new TypeError(`after_html '${content}' is an illegal html string`);
-    return {
-        self: wrap,
-        first: wrap.children[0]
-    }
+    wrap.innerHTML = content;
+    if (!wrap.firstElementChild) throw new TypeError(`after '${content}' is an illegal html tag string.`);
+    return wrap.firstElementChild;
 }
 
 export default function shear(target: Element, line_count = 0, after_html = '') {
     let sel = window.getSelection();
-
-    if (line_count < 0) throw new TypeError(`line_count ${line_count} must > 0`);
 
     let full_html = target.innerHTML
     let full_text = target.textContent;
@@ -30,9 +24,10 @@ export default function shear(target: Element, line_count = 0, after_html = '') 
     }
 
     let cut_node = sel.getRangeAt(0).cloneContents();
-    let wrap = createElement(cut_node).self;
+    let wrap = document.createElement('DIV');
+    wrap.appendChild(cut_node);
     let cut_html = wrap.innerHTML;
-    let cut_text = wrap.textContent;
+    let cut_text = cut_node.textContent;
 
     target.innerHTML = cut_html;
 
@@ -41,9 +36,9 @@ export default function shear(target: Element, line_count = 0, after_html = '') 
 
     let cut_html_with_after_html = '';
     let cut_text_with_after_html = '';
-    let br = createElement('<br/>').first;
+    let br = createElement('<br/>');
     if (after_html !== '') {
-        let insert = createElement(after_html).first;
+        let insert = createElement(after_html);
         target.appendChild(br);
         target.appendChild(insert);
         let rect = insert.getBoundingClientRect();
