@@ -1,27 +1,28 @@
 {
-  "name": "shear.js",
-  "version": "1.1.0",
-  "description": "truncating text across dom nodes",
-  "main": "dist/shear.js",
-  "keywords": [
-    "truncating text",
-    "TypeScript",
-    "JavaScript"
-  ],
-  "bugs": {
-    "url": "https://github.com/zhengrenzhe/shear.js/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zhengrenzhe/shear.js"
-  },
-  "license": "MIT",
-  "scripts": {
-    "dev": "parcel example/index.html -p 3000"
-  },
-  "devDependencies": {
-    "node-sass": "^4.9.2",
-    "parcel-bundler": "^1.9.7",
-    "typescript": "^2.9.2"
-  }
+    "name": "shear.js",
+    "version": "1.1.0",
+    "description": "truncating text across dom nodes",
+    "main": "dist/shear.js",
+    "keywords": [
+        "truncating text",
+        "TypeScript",
+        "JavaScript"
+    ],
+    "bugs": {
+        "url": "https://github.com/zhengrenzhe/shear.js/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zhengrenzhe/shear.js"
+    },
+    "license": "MIT",
+    "scripts": {
+        "start": "parcel example/index.pug -p 3000"
+    },
+    "devDependencies": {
+        "node-sass": "^4.9.2",
+        "parcel-bundler": "^1.9.7",
+        "pug": "^2.0.3",
+        "typescript": "^2.9.2"
+    }
 }

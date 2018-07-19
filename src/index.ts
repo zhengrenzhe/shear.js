@@ -1,65 +1,66 @@
-function createElement(content: string) {
-    let wrap = document.createElement('DIV');
-    wrap.innerHTML = content;
-    if (!wrap.firstElementChild) throw new TypeError(`after '${content}' is an illegal html tag string.`);
-    return wrap.firstElementChild;
+function createNode(htmlString: string) {
+    const div = document.createElement("div");
+    div.appendChild(new Range().createContextualFragment(htmlString));
+    return div.firstChild;
 }
 
-export default function shear(target: Element, line_count = 0, after_html = '') {
-    let sel = window.getSelection();
+function calcNodeRect(targetNode: Element, fragment: Node) {
+    const div = document.createElement("DIV");
+    div.appendChild(fragment);
+    div.style.width = `${targetNode.clientWidth}px`;
+    div.style.position = "absolute";
+    div.style.top = "-9999px";
+    div.style.left = "-9999px";
+    targetNode.appendChild(div);
+    const rect = div.firstElementChild.getBoundingClientRect();
+    targetNode.removeChild(div);
+    return rect;
+}
 
-    let full_html = target.innerHTML
-    let full_text = target.textContent;
+function shear(targetNode: Element, lineClamp = 2, afterHTML = null) {
+    if (!targetNode.childNodes.length) return {};
 
-    sel.selectAllChildren(target);
-    sel.collapseToStart();
+    const selection = window.getSelection();
+    const fullHTML = targetNode.innerHTML;
+    const fullHeight = targetNode.getBoundingClientRect().height;
 
-    for (let i = 0; i < line_count; i++) {
-        (sel as any).modify('extend', 'right', 'character');
-        (sel as any).modify('extend', 'right', 'lineboundary');
-        if (!target.contains(sel.getRangeAt(0).endContainer)) {
-            sel.selectAllChildren(target);
+    // collapse to first element start
+    selection.collapse(targetNode.childNodes[0], 0);
+
+    // select N lines
+    for (let i = 0; i < lineClamp; i++) {
+        (selection as any).modify("extend", "right", "character");
+        (selection as any).modify("extend", "right", "lineboundary");
+        if (!targetNode.contains(selection.focusNode)) {
+            selection.selectAllChildren(targetNode);
             break;
         }
     }
 
-    let cut_node = sel.getRangeAt(0).cloneContents();
-    let wrap = document.createElement('DIV');
-    wrap.appendChild(cut_node);
-    let cut_html = wrap.innerHTML;
-    let cut_text = cut_node.textContent;
+    // extract selection as target node's content
+    const extractedNode = selection.getRangeAt(0).cloneContents();
+    targetNode.innerHTML = "";
+    targetNode.appendChild(extractedNode);
 
-    target.innerHTML = cut_html;
-
-    sel.selectAllChildren(target);
-    sel.collapseToEnd();
-
-    let cut_html_with_after_html = '';
-    let cut_text_with_after_html = '';
-    let br = createElement('<br/>');
-    if (after_html !== '') {
-        let insert = createElement(after_html);
-        target.appendChild(br);
-        target.appendChild(insert);
-        let rect = insert.getBoundingClientRect();
-        for (let i = 0; i < 1000; i++) {
-            (sel as any).modify('extend', 'left', 'character');
-            if (sel.getRangeAt(0).getBoundingClientRect().width >= rect.width) {
-                sel.deleteFromDocument();
-                break;
-            }
+    // detect whether show afterHTML
+    if (targetNode.getBoundingClientRect().height < fullHeight && afterHTML) {
+        const afterNode = createNode(afterHTML);
+        const afterHTMLRect = calcNodeRect(targetNode, afterNode);
+        selection.selectAllChildren(targetNode);
+        selection.collapseToEnd();
+        let i = 0;
+        while (i++ < 100) {
+            (selection as any).modify("extend", "left", "character");
+            const rangeRact = selection.getRangeAt(0).getBoundingClientRect();
+            if (rangeRact.width >= afterHTMLRect.width) break;
         }
-        target.removeChild(br);
-        cut_html_with_after_html = target.innerHTML;
-        cut_text_with_after_html = target.textContent;
+        selection.deleteFromDocument();
+        selection.collapseToStart();
+        selection.getRangeAt(0).insertNode(afterNode);
+        selection.collapseToStart();
     }
 
-    return {
-        full_html,
-        full_text,
-        cut_html,
-        cut_text,
-        cut_html_with_after_html,
-        cut_text_with_after_html
-    }
+    return { fullHTML };
 }
+
+export default shear;
