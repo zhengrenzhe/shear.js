@@ -1,5 +1,8 @@
 function createFrag(htmlString: string) {
-    return document.createRange().createContextualFragment(htmlString);
+    const r = document.createRange();
+    // Chrome 36 以下需要range附加到一个dom后方可调用该方法
+    r.selectNode(document.body);
+    return r.createContextualFragment(htmlString);
 }
 
 function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
