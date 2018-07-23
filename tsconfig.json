@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "baseUrl": "./",
-        "rootDir": "./"
+        "baseUrl": "./src",
+        "rootDir": "./src"
     },
-    "include": ["src", "example"]
+    "include": ["src"]
 }

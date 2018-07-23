@@ -1,12 +1,12 @@
 {
     "name": "shear.js",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "description": "truncating text across dom nodes",
     "main": "dist/shear.js",
     "keywords": [
-        "truncating text",
-        "TypeScript",
-        "JavaScript"
+        "Truncate",
+        "Truncate DOM",
+        "TypeScript"
     ],
     "bugs": {
         "url": "https://github.com/zhengrenzhe/shear.js/issues"
@@ -17,9 +17,11 @@
     },
     "license": "MIT",
     "scripts": {
-        "start": "parcel example/index.pug -p 3000"
+        "start": "parcel example/index.pug -p 3000",
+        "build": "parcel build src/shear.js.ts -o shear.js && node_modules/.bin/dts-generator --project . --out dist/shear.d.ts"
     },
     "devDependencies": {
+        "dts-generator": "^2.1.0",
         "node-sass": "^4.9.2",
         "parcel-bundler": "^1.9.7",
         "pug": "^2.0.3",
