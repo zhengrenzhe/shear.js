@@ -5,7 +5,7 @@
     "main": "dist/shear.js",
     "keywords": [
         "Truncate",
-        "Truncate DOM",
+        "DOM",
         "TypeScript"
     ],
     "bugs": {
