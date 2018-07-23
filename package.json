@@ -18,7 +18,8 @@
     "license": "MIT",
     "scripts": {
         "start": "parcel example/index.pug -p 3000",
-        "build": "parcel build src/shear.js.ts -o shear.js && node_modules/.bin/dts-generator --project . --out dist/shear.d.ts"
+        "build": "parcel build src/shear.js.ts -o shear.js && node_modules/.bin/dts-generator --project . --out dist/shear.d.ts",
+        "release": "parcel build --global shear -d release src/shear.js.ts -o shear.js"
     },
     "devDependencies": {
         "dts-generator": "^2.1.0",
