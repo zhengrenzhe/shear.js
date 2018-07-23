@@ -1,5 +1,5 @@
 function createFrag(htmlString: string) {
-    return new Range().createContextualFragment(htmlString);
+    return document.createRange().createContextualFragment(htmlString);
 }
 
 function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
