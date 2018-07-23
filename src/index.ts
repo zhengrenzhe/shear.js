@@ -24,16 +24,15 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML = null) {
         }
     }
 
+    const selectedRange = selection.getRangeAt(0).cloneRange();
+
     // 将选区设置为未被前一步选中的内容，直接进行删除。
-    selection.setBaseAndExtent(
-        selection.focusNode,
-        selection.focusOffset,
-        targetNode.childNodes[targetNode.childNodes.length - 1],
-        targetNode.childNodes.length - 1,
-    );
-    selection.deleteFromDocument();
+    selection.selectAllChildren(targetNode);
+    const removeRange = selection.getRangeAt(0).cloneRange();
+    removeRange.setStart(selectedRange.endContainer, selectedRange.endOffset);
+    removeRange.deleteContents();
     const cutedHTML = targetNode.innerHTML;
-    const isCuted = fullHTML.trim() !== cutedHTML.trim();
+    const isCuted = fullHTML !== cutedHTML;
     let cutedWithAfterHTML = cutedHTML;
 
     // 插入afterHTML
@@ -51,7 +50,7 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML = null) {
         (selection as any).modify("extend", "right", "character");
         selection.getRangeAt(0).insertNode(frag);
 
-        // 从选区向左删除字符，知道目标节点高度恢复到插入afterHTML前为止
+        // 从选区向左删除字符，直到目标节点高度恢复到插入afterHTML前为止
         selection.collapseToStart();
         while (targetNode.getBoundingClientRect().height > truncatedHeight) {
             (selection as any).modify("extend", "left", "character");
