@@ -1,4 +1,4 @@
-import shear from "../src/index";
+import shear from "../src/shear.js";
 
 [].slice.call(document.querySelectorAll(".cut")).forEach(_ele => {
     const el = _ele as Element;
