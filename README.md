@@ -16,18 +16,11 @@
 -   zero dependency
 -   very lightweight (2.2kb)
 
-## Support
+## Browser Support
 
--   Chrome 23+
--   Firefox 22+
--   Opera 15+
--   Yandex 14.12
--   Safari 6.2+
--   iOS 7+ safari
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| not support                                                                                                                                                                                                     | 22+                                                                                                                                                                                                               | 23+                                                                                                                                                                                                           | 6.2+                                                                                                                                                                                                          | 15+                                                                                                                                                                                                       |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari
+| :---: | :---: | :---: | :---: | :---: |
+| not support | 16+ | 16+ | 15+ | 6+ |
 
 Unfortunately, because IE/Edge does not support the relevant API, shear.js not support IE/Edge.
 
@@ -39,123 +32,24 @@ yarn
 yarn add shear.js
 ```
 
-npm
-
-```
-npm install shear.js
-```
-
 ## Usage
 
-[download](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/dist/shear-umd.js) shear.js in your project, or use ES6 module:
-
 ```
-import shear from 'shear.js';
+import shear from "shear.js";
 ```
 
-display 3 lines, remaining hidden
+display three lines
 
 ```
 shear(document.getElementById('target'), 3);
 ```
 
-display 3 lines, add html string at the end
+display three lines, add html string at the end of the DOM
 
 ```
-shear(document.getElementById('target'),  3, '<span>（展开）</span>');
+shear(document.getElementById('target'),  3, '<span>...(More)</span>');
 ```
 
 ## Example
 
-<p>before</p>
-
-![](https://dn-droiz.qbox.me/p11.png)
-
-<p>after</p>
-
-![](https://dn-droiz.qbox.me/p2.png)
-
-<p>before</p>
-
-![](https://dn-droiz.qbox.me/p3.png)
-
-<p>after</p>
-
-![](https://dn-droiz.qbox.me/p4.png)
-
-<a href="https://codepen.io/droiz/pen/YYWBBw/">codepen.io</a>
-
-<hr />
-
-**shear.js** 是一个零依赖的 javascript 工具，它使用 [Selection API](https://developer.mozilla.org/zh-CN/docs/Web/API/Selection) 来根据实际的可视内容截断多行文字，并返回原始与截断后的内容。由于原理与以往的同类工具不同，shear.js 具有以下特性：
-
--   **目标元素无需设置为块级元素**
--   **在目标元素内进行垮 dom 节点截断，保留目标元素内的原始 dom 节点**
--   在截断的尾部插入 html 字符串
--   零依赖
--   轻量级（UMD: 1.3kb, ES Module 1.1kb）
-
-## 支持
-
--   Chrome 23+
--   Firefox 22+
--   Opera 15+
--   Yandex 14.12
--   Safari 6.2+
--   iOS 7+ safari
-
-不幸的是，由于 IE/Edge 不支持相关 API，shear.js 目前不支持 IE/Edge。
-
-## 安装
-
-yarn
-
-```
-yarn add shear.js
-```
-
-npm
-
-```
-npm install shear.js
-```
-
-## 使用
-
-[下载](https://raw.githubusercontent.com/zhengrenzhe/shear.js/master/dist/shear-umd.js) shear.js 到你的项目中，或使用 ES6 模块
-
-```
-import shear from 'shear.js';
-```
-
-显示 3 行，剩余的隐藏
-
-```
-shear(document.getElementById('target'), 3);
-```
-
-显示 3 行，末尾添加 html 字符串
-
-```
-shear(document.getElementById('target'),  3, '<span>（展开）</span>');
-```
-
-## 示例
-
-<p>截断前</p>
-
-![](https://dn-droiz.qbox.me/p11.png)
-
-<p>截断后</p>
-
-![](https://dn-droiz.qbox.me/p2.png)
-
-<p>截断前</p>
-
-![](https://dn-droiz.qbox.me/p3.png)
-
-<p>截断后</p>
-
-![](https://dn-droiz.qbox.me/p4.png)
-
-<a href="https://codepen.io/droiz/pen/YYWBBw/">codepen.io</a>
+[Codepen](https://codepen.io/droiz/full/YYWBBw)

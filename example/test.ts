@@ -5,7 +5,7 @@ import shear from "../src/shear.js";
     el.addEventListener("click", () => {
         const res = shear(
             el.parentElement.firstElementChild,
-            7,
+            3,
             "<span>...展开</span>",
         );
         console.log(res);
