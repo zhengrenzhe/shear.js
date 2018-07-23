@@ -1,20 +1,5 @@
-function createNode(htmlString: string) {
-    const div = document.createElement("div");
-    div.appendChild(new Range().createContextualFragment(htmlString));
-    return div.firstChild;
-}
-
-function calcNodeRect(targetNode: Element, fragment: Node) {
-    const div = document.createElement("DIV");
-    div.appendChild(fragment);
-    div.style.width = `${targetNode.clientWidth}px`;
-    div.style.position = "absolute";
-    div.style.top = "-9999px";
-    div.style.left = "-9999px";
-    targetNode.appendChild(div);
-    const rect = div.firstElementChild.getBoundingClientRect();
-    targetNode.removeChild(div);
-    return rect;
+function createFrag(htmlString: string) {
+    return new Range().createContextualFragment(htmlString);
 }
 
 function shear(targetNode: Element, lineClamp = 2, afterHTML = null) {
@@ -41,26 +26,32 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML = null) {
     const extractedNode = selection.getRangeAt(0).cloneContents();
     targetNode.innerHTML = "";
     targetNode.appendChild(extractedNode);
+    const cutedHTML = targetNode.innerHTML;
+    const isCuted = fullHTML !== cutedHTML;
+    let cutedWithAfterHTML = cutedHTML;
 
     // detect whether show afterHTML
-    if (targetNode.getBoundingClientRect().height < fullHeight && afterHTML) {
-        const afterNode = createNode(afterHTML);
-        const afterHTMLRect = calcNodeRect(targetNode, afterNode);
+    const truncatedHeight = targetNode.getBoundingClientRect().height;
+    if (truncatedHeight < fullHeight && afterHTML) {
+        const frag = createFrag(afterHTML);
+
+        // replace last character as after html
         selection.selectAllChildren(targetNode);
         selection.collapseToEnd();
-        let i = 0;
-        while (i++ < 100) {
-            (selection as any).modify("extend", "left", "character");
-            const rangeRact = selection.getRangeAt(0).getBoundingClientRect();
-            if (rangeRact.width >= afterHTMLRect.width) break;
-        }
+        (selection as any).modify("extend", "left", "character");
         selection.deleteFromDocument();
+        selection.getRangeAt(0).insertNode(frag);
+
+        // restore height
         selection.collapseToStart();
-        selection.getRangeAt(0).insertNode(afterNode);
-        selection.collapseToStart();
+        while (targetNode.getBoundingClientRect().height > truncatedHeight) {
+            (selection as any).modify("extend", "left", "character");
+            selection.deleteFromDocument();
+        }
+        cutedWithAfterHTML = targetNode.innerHTML;
     }
 
-    return { fullHTML };
+    return { isCuted, fullHTML, cutedHTML, cutedWithAfterHTML };
 }
 
 export default shear;
