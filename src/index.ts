@@ -2,8 +2,14 @@ function createFrag(htmlString: string) {
     return new Range().createContextualFragment(htmlString);
 }
 
-function shear(targetNode: Element, lineClamp = 2, afterHTML = null) {
-    if (!targetNode.childNodes.length) return {};
+function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
+    if (!targetNode.childNodes.length)
+        return {
+            isCuted: false,
+            fullHTML: "",
+            cutedHTML: "",
+            cutedWithAfterHTML: "",
+        };
 
     const selection = window.getSelection();
     const fullHTML = targetNode.innerHTML;
