@@ -2,3 +2,9 @@ node_modules
 .cache
 .vscode
 example
+.editorconfig
+.prettierrc
+dist/style.*
+dist/test.*
+dist/*.html
+release
