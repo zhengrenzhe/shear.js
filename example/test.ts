@@ -11,3 +11,11 @@ import shear from "../src/shear.js";
         console.log(res);
     });
 });
+
+document.getElementById("t1").addEventListener("click", () => {
+    shear(document.getElementById("truncate1"), 2);
+});
+
+document.getElementById("t2").addEventListener("click", () => {
+    shear(document.getElementById("truncate2"), 2, "<span>... (more)</span>");
+});

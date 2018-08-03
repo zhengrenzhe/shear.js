@@ -1,11 +1,51 @@
 body {
-  margin: 20px;
+    margin: 20px;
 }
 
 img {
-  max-width: 200px;
+    max-width: 200px;
 }
 
 .content {
-  border: 1px solid #494949;
+    border: 1px solid #494949;
+}
+
+.block {
+    overflow: hidden;
+    p {
+        float: left;
+        width: 400px;
+        position: relative;
+        img {
+            border: 1px dashed #ccc;
+        }
+    }
+}
+
+.raw {
+    border: 1px solid red;
+    margin-right: 80px;
+    &:after {
+        content: "raw";
+        position: absolute;
+        color: red;
+        top: 0;
+        right: -40px;
+    }
+}
+
+.truncated {
+    border: 1px solid green;
+    &:after {
+        content: "truncated";
+        position: absolute;
+        color: green;
+        top: 0;
+        right: -85px;
+    }
+}
+
+button {
+    float: left;
+    margin: 40px 120px;
 }
