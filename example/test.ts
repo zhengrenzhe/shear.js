@@ -19,3 +19,7 @@ document.getElementById("t1").addEventListener("click", () => {
 document.getElementById("t2").addEventListener("click", () => {
     shear(document.getElementById("truncate2"), 2, "<span>... (more)</span>");
 });
+
+document.getElementById("t3").addEventListener("click", () => {
+    shear(document.getElementById("truncate3"), 2, "<span>... (more)</span>");
+});

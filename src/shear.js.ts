@@ -1,21 +1,17 @@
-import getPos, { getTextNodes } from "./edge";
+/**
+ * Copyright (c) 2017 zhengrenzhe
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-const isMicrosoft = !("modify" in window.getSelection());
-
-function createFrag(htmlString: string) {
-    const div = document.createElement("div");
-    div.innerHTML = htmlString.trim();
-    return div.firstChild;
-}
+import getPos from "./edge";
+import { isMS, createFragment, getTextNodes } from "./utils";
+import { returns } from "./returns";
 
 function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
-    if (!targetNode.childNodes.length)
-        return {
-            isCuted: false,
-            fullHTML: "",
-            cutedHTML: "",
-            cutedWithAfterHTML: "",
-        };
+    // 无子节点直接返回
+    if (!targetNode.childNodes.length) return returns(false);
 
     const selection = window.getSelection();
     const fullHTML = targetNode.innerHTML;
@@ -24,9 +20,9 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
     // 把选区折叠到目标节点起始处
     selection.collapse(targetNode, 0);
 
+    // 获取目标行结尾位置
     let divideCaret: Range;
-
-    if (isMicrosoft) {
+    if (isMS) {
         divideCaret = getPos(targetNode, lineClamp);
     } else {
         // 选N行
@@ -50,7 +46,6 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
         selection.getRangeAt(0).endContainer,
         selection.getRangeAt(0).endOffset,
     );
-    selection.removeAllRanges();
     divideCaret.cloneRange().deleteContents();
 
     const cutedHTML = targetNode.innerHTML;
@@ -60,7 +55,7 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
     // 插入afterHTML
     const truncatedHeight = targetNode.getBoundingClientRect().height;
     if (truncatedHeight < fullHeight && afterHTML) {
-        const frag = createFrag(afterHTML);
+        const frag = createFragment(afterHTML);
 
         // 将选区定位到目标元素结尾
         let texts = getTextNodes(targetNode);
@@ -91,7 +86,7 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
     }
 
     selection.removeAllRanges();
-    return { isCuted, fullHTML, cutedHTML, cutedWithAfterHTML };
+    return returns(isCuted, fullHTML, cutedHTML, cutedWithAfterHTML);
 }
 
 export default shear;

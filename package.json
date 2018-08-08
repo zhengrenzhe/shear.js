@@ -1,6 +1,6 @@
 {
     "name": "shear.js",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "truncating text across dom nodes",
     "main": "dist/shear.js",
     "keywords": [
