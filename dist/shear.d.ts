@@ -1,7 +1,23 @@
+declare module 'utils' {
+	export const isMS: boolean;
+	export function toArr<T>(iterable: ArrayLike<T>): T[];
+	export function createFragment(htmlString: string): DocumentFragment;
+	export function getTextNodes(root: Node): Text[];
+
+}
 declare module 'edge' {
-	 function getTextNodes(root: Node): Text[]; function getPos(targetNode: Node, lineClamp: number): Range;
+	 function getPos(targetNode: Node, lineClamp: number): Range;
 	export default getPos;
-	export { getTextNodes };
+
+}
+declare module 'returns' {
+	 function returns(isCuted: boolean, fullHTML?: string, cutedHTML?: string, cutedWithAfterHTML?: string): {
+	    isCuted: boolean;
+	    fullHTML: string;
+	    cutedHTML: string;
+	    cutedWithAfterHTML: string;
+	};
+	export { returns };
 
 }
 declare module 'shear.js' {

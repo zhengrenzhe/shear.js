@@ -14,7 +14,7 @@
 -   **truncate across dom nodes within the target element, keep the original dom node within the target element**
 -   **insert the html string at the end of the truncation**
 -   zero dependency
--   very lightweight (3.2kb)
+-   very lightweight (1.9kb)
 
 ## Browser Support
 
@@ -24,10 +24,14 @@
 
 ## Install
 
-yarn
-
 ```
 yarn add shear.js
+```
+
+or
+
+```
+<script src="https://rawgit.com/zhengrenzhe/shear.js/master/dist/shear.js"></script>
 ```
 
 ## Usage

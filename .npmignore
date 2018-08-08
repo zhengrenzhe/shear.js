@@ -8,3 +8,4 @@ dist/style.*
 dist/test.*
 dist/*.html
 release
+.rpt2_cache

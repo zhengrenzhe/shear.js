@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-        "target": "esnext",
+        "target": "es5",
         "baseUrl": "./src",
-        "rootDir": "./src"
+        "rootDir": "./src",
+        "removeComments": true
     },
     "include": ["src"]
 }

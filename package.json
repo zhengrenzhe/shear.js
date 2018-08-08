@@ -18,13 +18,15 @@
     "license": "MIT",
     "scripts": {
         "start": "parcel example/index.html -p 3000",
-        "build": "parcel build src/shear.js.ts -o shear.js && node_modules/.bin/dts-generator --project . --out dist/shear.d.ts",
-        "release": "parcel build --global shear -d release src/shear.js.ts -o shear.js"
+        "build": "rollup --config rollup.config.js && dts-generator --project . --out dist/shear.d.ts"
     },
     "devDependencies": {
         "dts-generator": "^2.1.0",
         "node-sass": "^4.9.2",
         "parcel-bundler": "^1.9.7",
+        "rollup": "^0.64.1",
+        "rollup-plugin-typescript2": "^0.16.1",
+        "rollup-plugin-uglify": "^4.0.0",
         "typescript": "^3.0.1"
     }
 }

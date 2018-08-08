@@ -1,5 +1,7 @@
-node_modules
 .cache
+.rpt2_cache
+node_modules
 dist/index.html
 dist/style.*
 dist/test.*
+dist/*.jpg
