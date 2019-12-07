@@ -40,6 +40,7 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
         divideCaret = selection.getRangeAt(0).cloneRange();
     }
 
+
     // 将选区设置为未被前一步选中的内容，直接进行删除。
     selection.selectAllChildren(targetNode);
     divideCaret.setEnd(
@@ -56,7 +57,6 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
     const truncatedHeight = targetNode.getBoundingClientRect().height;
     if (truncatedHeight < fullHeight && afterHTML) {
         const frag = createFragment(afterHTML);
-
         // 将选区定位到目标元素结尾
         let texts = getTextNodes(targetNode);
         const endText = texts[texts.length - 1];
@@ -66,7 +66,7 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
         insertCaret.setEnd(endText, endOffset);
 
         // 插入html fragment
-        insertCaret.insertNode(frag);
+        targetNode.appendChild(frag);
 
         // 从插入处向左删除字符，直到目标节点高度恢复到插入afterHTML前为止
         (() => {
@@ -79,9 +79,16 @@ function shear(targetNode: Element, lineClamp = 2, afterHTML: string = null) {
                     delRange.setStart(texts[i], j);
                     delRange.setEnd(texts[i], j + 1);
                     delRange.deleteContents();
+
+                    // 删除 text 时，同时删掉 text 的 parentnode
+                    const { parentNode } = texts[i];
+                    if (parentNode && parentNode !== targetNode && !parentNode.textContent) {
+                        targetNode.removeChild(parentNode)
+                    }
                 }
             }
         })();
+
         cutedWithAfterHTML = targetNode.innerHTML;
     }
 
